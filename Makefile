@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/11 13:21:32 by rnijhuis      #+#    #+#                  #
-#    Updated: 2021/11/11 13:22:25 by rnijhuis      ########   odam.nl          #
+#    Updated: 2021/11/11 15:17:02 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,7 @@ CC = gcc
 COMPILE = $(CC) $(CFLAGS)
 
 $(NAME): $(OBJ)
-	$(CC) -Imlx $(CFLAGS) $(FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-	make -C get_next_line
+	$(CC) $(FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 all: $(NAME)
 
