@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   so_long.h                                          :+:    :+:            */
+/*   ft_strdup.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/11/11 14:16:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/11 14:37:06 by rnijhuis      ########   odam.nl         */
+/*   Created: 2021/11/09 09:45:24 by rnijhuis      #+#    #+#                 */
+/*   Updated: 2021/11/09 09:45:25 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "libft.h"
 
-void	create_window(void *wndw, int width, int height, char *title);
+char	*ft_strdup(const char *s1)
+{	
+	char	*string;
 
-#endif
+	string = malloc((ft_strlen(s1) + 1) * sizeof(char));
+	if (string == NULL)
+		return (NULL);
+	ft_strlcpy(string, s1, ft_strlen(s1) + 1);
+	return (string);
+}

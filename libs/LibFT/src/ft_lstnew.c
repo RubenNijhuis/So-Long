@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   window.c                                           :+:    :+:            */
+/*   ft_lstnew.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/11/11 14:15:19 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/11 15:15:25 by rnijhuis      ########   odam.nl         */
+/*   Created: 2021/11/09 09:44:41 by rnijhuis      #+#    #+#                 */
+/*   Updated: 2021/11/09 09:44:41 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./mlx/mlx.h"
+#include "libft.h"
 
-void	create_window(void *mlx, void *wndw, int width, int height, char *title)
+t_list	*ft_lstnew(void *content)
 {
-	mlx = mlx_init();
-	wndw = mlx_new_window(mlx, width, height, title);
+	struct s_list	*block;
+
+	block = (t_list *) malloc(sizeof(*block));
+	if (block == NULL)
+		return (NULL);
+	block->content = content;
+	block->next = NULL;
+	return (block);
 }
