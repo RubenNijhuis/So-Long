@@ -1,13 +1,13 @@
 /* XPM */
-static char *_4545f0619244906d4d10d18028a83c1N2J3nQYobEJF0CzE[] = {
+static char *_376838ab4994b3cb715cc79c3c11fb2FLW1SVxEJEbemZwW[] = {
 /* columns rows colors chars-per-pixel */
 "348 320 15 1 ",
 "  c #5A8D3E",
 ". c #0446FC",
 "X c #010201",
-"o c none",
+"o c #EEEEEE",
 "O c #A15A35",
-"+ c none",
+"+ c white",
 "@ c #649D44",
 "# c #1F2618",
 "$ c #354D28",
