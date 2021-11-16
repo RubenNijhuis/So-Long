@@ -14,3 +14,11 @@ User
 
 UI
 	[ ] working off button
+
+project structure
+main pipeliens
+	data validation
+	data rendering
+	user hooks
+	exit strategy
+

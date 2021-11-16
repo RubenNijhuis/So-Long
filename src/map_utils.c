@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/16 11:08:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/16 16:23:50 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/16 16:41:15 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	validate_map(s_game_data *game_data)
 		printf("Error! Could not open file\n");
 		exit(-1);
 	}
-	map = parse_map();
+	map = parse_map(game_data->);
 }
 
 char	**parse_map(s_game_data* game_data)
