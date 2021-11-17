@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/11 13:42:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/16 14:30:03 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/17 16:04:45 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,16 @@
 // 	*(unsigned int*)dst = color;
 // }
 
-int	main(int argc, char *argv[])
+int	main()
 {
 	struct s_game_data	*game_data;
-	struct s_game_state	game_state;
+	struct s_game_state	*game_state;
 	/*
 		validate data
 	*/
-	(void)argc;
-	validate_map(argv[1], game_data);
 
-	printf("%s", game_data->map[0]);
+	// printf("%s", argv[1]);
+	printf("%i", validate_map("assets/map1.ber", game_data));
 	/*
 		render data
 	*/

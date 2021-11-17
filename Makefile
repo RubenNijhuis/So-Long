@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/11 13:21:32 by rnijhuis      #+#    #+#                  #
-#    Updated: 2021/11/16 14:06:39 by rnijhuis      ########   odam.nl          #
+#    Updated: 2021/11/17 15:41:35 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRC_DIR := src
 BIN_DIR := ./bin/
 
 SRCS := src/main.c\
-		src/map_utils.c\
+		src/map/utils.c\
+		src/map/validation.c\
 
 INCLUDES := ./include/libft.a\
 			./include/get_next_line.a
