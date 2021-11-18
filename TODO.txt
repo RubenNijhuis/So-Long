@@ -1,0 +1,24 @@
+Parse map
+	[ ] check if map is surrounded by walls
+	[ ] check if map only has valid values
+	[ ] check if map is rectangular (no lines longer than others)
+
+Display images
+	[ ] display grid of images
+	[ ] display character
+
+User
+	[ ] move user
+	 — [ ] check if user can go to the block (not wall)
+	[ ] change user img based on direction
+
+UI
+	[ ] working off button
+
+project structure
+main pipeliens
+	data validation
+	data rendering
+	user hooks
+	exit strategy
+

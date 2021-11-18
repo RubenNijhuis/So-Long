@@ -1,0 +1,6 @@
+[submodule "LibFT"]
+	path = LibFT
+	url = git@github.com:RubenNijhuis/LibFT.git
+[submodule "Get-Next-Line"]
+	path = Get-Next-Line
+	url = git@github.com:RubenNijhuis/Get-Next-Line.git
