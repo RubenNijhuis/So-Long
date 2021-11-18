@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/16 11:08:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/17 16:19:45 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/18 13:08:40 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	validate_map(char *path, struct s_game_data *gd)
 		exit(-1);
 	}
 	gd->map = parse_map(fd, gd);
-	// set_map_size(gd);
-	// return_value += rect_check(gd);
-	// return_value += border_check(gd);
-	// return_value += value_check(gd);
+	set_map_size(gd);
+	return_value += rect_check(gd);
+	return_value += border_check(gd);
+	return_value += value_check(gd);
 	return (return_value);
 }
 
@@ -53,8 +53,19 @@ int	border_check(struct s_game_data *gd)
 	{
 		while (column < gd->map_width)
 		{
+			if (row == 0 || row == gd->map_height - 1)
+			{
+				if (gd->map[row][column] != '1')
+					return (1);
+			}
+			else
+				if (column == 0 || column == gd->map_width - 1)
+					if (gd->map[row][column] != '1')
+						return (1);
 			column++;
 		}
+		column = 0;
+		row++;
 	}
 	return (0);
 }
@@ -74,8 +85,8 @@ int	value_check(struct s_game_data *gd)
 				return (1);
 			column++;
 		}
-		row++;
 		column = 0;
+		row++;
 	}
 	return (0);
 }
@@ -89,7 +100,7 @@ int	rect_check(struct s_game_data *gd)
 	prev_len = 0;
 	row_len = 0;
 	row = 0;
-	while (gd->map[row][0] != '\0')
+	while (gd->map[row] != NULL)
 	{
 		if (row == 0)
 			prev_len = ft_strlen(gd->map[row]);
