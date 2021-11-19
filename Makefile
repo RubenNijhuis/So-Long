@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/11 13:21:32 by rnijhuis      #+#    #+#                  #
-#    Updated: 2021/11/18 16:17:27 by rnijhuis      ########   odam.nl          #
+#    Updated: 2021/11/18 21:34:43 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ INCLUDES := ./include/libft.a\
 			./include/get_next_line.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra 
+CFLAGS = -Wall -Wextra -Werror
 COMPILE = $(CC) $(CFLAGS)
 
 $(NAME): $(OBJS) ./include/so_long.h
