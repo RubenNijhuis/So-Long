@@ -6,19 +6,13 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/17 13:47:52 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/18 13:41:29 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/19 12:37:10 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/mlx.h"
-#include "../../include/so_long.h"
-#include "../../include/libft.h"
-#include "../../include/get_next_line.h"
-
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include <so_long.h>
+#include <libft.h>
+#include <get_next_line.h>
 
 void	set_map_size(struct s_game_data *gd)
 {

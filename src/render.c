@@ -6,35 +6,19 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 13:24:12 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/18 22:36:47 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/19 13:05:42 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
-#include "../include/libft.h"
-#include "../include/mlx.h"
+#include <so_long.h>
+#include <libft.h>
+#include <mlx.h>
 #include <stdio.h>
-
-// typedef struct s_data {
-// 	void	*img;
-// 	char	*addr;
-// 	int		bits_per_pixel;
-// 	int		line_length;
-// 	int		endian;
-// }	t_data;
-
-// void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-// {
-// 	char	*dst;
-
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-// 	*(unsigned int*)dst = color;
-// }
 
 void	render_image(char type, int row, int column, struct s_game_data *gd)
 {
 	void	*image;
-    int		size;
+	int		size;
 
 	size = 32;
 	if (type == '0')
@@ -61,6 +45,7 @@ void	render_map(struct s_game_data *gd)
 	{
 		while (column < gd->map_width)
 		{
+			render_image('0', row, column, gd);
 			render_image(gd->map[row][column], row, column, gd);
 			column++;
 		}
@@ -69,11 +54,29 @@ void	render_map(struct s_game_data *gd)
 	}
 }
 
+void	*create_window(struct s_game_data *gd)
+{
+	void	*window;
+
+	window = mlx_new_window(gd->mlx, gd->map_width * 32,
+			gd->map_height * 32, gd->name);
+	return (window);
+}
+
+int	render_next_frame(struct s_game_data *gd)
+{
+	render_map(gd);
+}
+
 void	render(struct s_game_data *gd)
 {
-    gd->mlx = mlx_init();
-    initialize_game_data(gd);
-    gd->mlx_win = mlx_new_window(gd->mlx, gd->map_width * 32, gd->map_height * 32, gd->name);
-    render_map(gd);
-    mlx_loop(gd->mlx);
+	gd->mlx = mlx_init();
+	initialize_game_data(gd);
+	gd->mlx_win = create_window(gd);
+	render_map(gd);
+
+	mlx_key_hook(vars.win, key_hook, &vars);
+	mlx_loop_hook(mlx, render_next_frame, YourStruct);
+
+	mlx_loop(gd->mlx);
 }

@@ -6,16 +6,18 @@
 #    By: rnijhuis <rnijhuis@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/11 13:21:32 by rnijhuis      #+#    #+#                  #
-#    Updated: 2021/11/18 21:34:43 by rubennijhui   ########   odam.nl          #
+#    Updated: 2021/11/19 12:44:59 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := so_long
+INCLUDE_DIR := include
 SRC_DIR := src
 BIN_DIR := ./bin/
 
 SRCS := src/main.c\
 		src/render.c\
+		src/exit_strategy.c\
 		src/map/utils.c\
 		src/map/validation.c\
 		src/initialize_data.c\
@@ -28,7 +30,7 @@ CFLAGS = -Wall -Wextra -Werror
 COMPILE = $(CC) $(CFLAGS)
 
 $(NAME): $(OBJS) ./include/so_long.h
-	@$(COMPILE) $(SRCS) $(INCLUDES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(BIN_DIR)$(NAME)
+	@$(COMPILE) $(SRCS) $(INCLUDES) -I $(INCLUDE_DIR) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(BIN_DIR)$(NAME)
 
 libft:
 	@make -C ./libs/LibFT/src

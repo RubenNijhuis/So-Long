@@ -6,19 +6,17 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/16 11:08:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/18 13:08:40 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/19 12:38:28 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/mlx.h"
-#include "../../include/so_long.h"
-#include "../../include/libft.h"
-#include "../../include/get_next_line.h"
+#include <mlx.h>
+#include <so_long.h>
+#include <libft.h>
+#include <get_next_line.h>
 
 #include <stdio.h>
 #include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
 
 int	validate_map(char *path, struct s_game_data *gd)
 {
@@ -30,10 +28,7 @@ int	validate_map(char *path, struct s_game_data *gd)
 	gd->map_path = path;
 	fd = open(gd->map_path, O_RDONLY);
 	if (fd == -1)
-	{
-		printf("Error! Could not open file\n");
-		exit(-1);
-	}
+		exit_strategy("Error! Could not open file\n", -1);
 	gd->map = parse_map(fd, gd);
 	set_map_size(gd);
 	return_value += rect_check(gd);
