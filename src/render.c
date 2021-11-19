@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 13:24:12 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/19 13:05:42 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/19 16:28:30 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	render_image(char type, int row, int column, struct s_game_data *gd)
 	int		size;
 
 	size = 32;
-	if (type == '0')
+	if (type == '0' || type == 'P')
 		image = gd->empty_space_img;
 	if (type == '1')
 		image = gd->wall_img;
@@ -29,12 +29,10 @@ void	render_image(char type, int row, int column, struct s_game_data *gd)
 		image = gd->collectible_img;
 	if (type == 'E')
 		image = gd->map_exit_img;
-	if (type == 'P')
-		image = gd->player_img;
-	mlx_put_image_to_window(gd->mlx, gd->mlx_win, image, 32 * column, 32 * row);
+	mlx_put_image_to_window(gd->mlx, gd->win, image, 32 * column, 32 * row);
 }
 
-void	render_map(struct s_game_data *gd)
+int	render_map(struct s_game_data *gd)
 {
 	int		row;
 	int		column;
@@ -52,6 +50,8 @@ void	render_map(struct s_game_data *gd)
 		column = 0;
 		row++;
 	}
+	render_player(gd, );
+	return (0);
 }
 
 void	*create_window(struct s_game_data *gd)
@@ -63,20 +63,12 @@ void	*create_window(struct s_game_data *gd)
 	return (window);
 }
 
-int	render_next_frame(struct s_game_data *gd)
-{
-	render_map(gd);
-}
-
-void	render(struct s_game_data *gd)
+void	render(struct s_game_data *gd, struct s_game_state *gs)
 {
 	gd->mlx = mlx_init();
 	initialize_game_data(gd);
-	gd->mlx_win = create_window(gd);
-	render_map(gd);
-
-	mlx_key_hook(vars.win, key_hook, &vars);
-	mlx_loop_hook(mlx, render_next_frame, YourStruct);
-
+	gd->win = create_window(gd);
+	mlx_key_hook(gd->win, key_hook, gd);
+	mlx_loop_hook(gd->mlx, render_map, gd);
 	mlx_loop(gd->mlx);
 }
