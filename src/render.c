@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 13:24:12 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/18 16:51:56 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/18 22:36:47 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@
 void	render_image(char type, int row, int column, struct s_game_data *gd)
 {
 	void	*image;
-	int		*sizeptr;
-	int		size;
+    int		size;
 
 	size = 32;
-	sizeptr = &size;
 	if (type == '0')
 		image = gd->empty_space_img;
 	if (type == '1')
@@ -73,9 +71,9 @@ void	render_map(struct s_game_data *gd)
 
 void	render(struct s_game_data *gd)
 {
-	// printf("%s", gd->player_img);
-	gd->mlx = mlx_init();
-	gd->mlx_win = mlx_new_window(gd->mlx, gd->map_width * 32, gd->map_height * 32, gd->name);
-	render_map(gd);
-	mlx_loop(gd->mlx);
+    gd->mlx = mlx_init();
+    initialize_game_data(gd);
+    gd->mlx_win = mlx_new_window(gd->mlx, gd->map_width * 32, gd->map_height * 32, gd->name);
+    render_map(gd);
+    mlx_loop(gd->mlx);
 }
