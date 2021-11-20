@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/11 13:21:32 by rnijhuis      #+#    #+#                  #
-#    Updated: 2021/11/19 15:13:16 by rnijhuis      ########   odam.nl          #
+#    Updated: 2021/11/20 01:03:47 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ SRCS := src/main.c\
 		src/exit_strategy.c\
 		src/map/utils.c\
 		src/map/validation.c\
+		src/map/set_values.c\
 		src/player/movement.c\
+		src/player/render.c\
 		src/initialize_data.c\
 
 INCLUDES := ./include/libft.a\
