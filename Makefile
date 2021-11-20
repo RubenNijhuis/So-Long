@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/11 13:21:32 by rnijhuis      #+#    #+#                  #
-#    Updated: 2021/11/20 01:03:47 by rubennijhui   ########   odam.nl          #
+#    Updated: 2021/11/20 11:11:11 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ mlx:
 	@echo "📦 Moving mlx to 'include'"
 
 run:
-	./bin/so_long assets/map1.ber
+	./bin/so_long assets/map2.ber
 
 all: libft get_next_line mlx
 
