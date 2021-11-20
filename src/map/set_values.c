@@ -6,12 +6,13 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/20 01:02:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2021/11/20 01:11:43 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/20 11:10:21 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 #include <libft.h>
+#include <stdio.h>
 
 void	set_map_size(struct s_game_data *gd)
 {

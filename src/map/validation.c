@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/16 11:08:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/20 00:56:49 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/20 11:07:40 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	validate_map(char *path, struct s_game_data *gd)
 	gd->map = parse_map(fd, gd);
 	set_map_size(gd);
 	set_player_position(gd);
+	set_amount_collectibles(gd);
 	return_value += rect_check(gd);
 	return_value += border_check(gd);
 	return_value += value_check(gd);
