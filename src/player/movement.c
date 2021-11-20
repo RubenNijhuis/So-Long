@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/19 10:53:02 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/19 15:14:14 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/20 01:12:13 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,54 @@
 #include <mlx.h>
 #include <stdio.h>
 
+int	check_movement_valid(int keycode, struct s_game_data *gd)
+{
+	if (keycode == gd->key_left)
+	{
+		if (gd->map[gd->player_y][gd->player_x - 1] == '1')
+			return (0);
+	}
+	else if (keycode == gd->key_right)
+	{
+		if (gd->map[gd->player_y][gd->player_x + 1] == '1')
+			return (0);
+	}
+	else if (keycode == gd->key_up)
+	{
+		if (gd->map[gd->player_y - 1][gd->player_x] == '1')
+			return (0);
+	}
+	else if (keycode == gd->key_down)
+	{
+		if (gd->map[gd->player_y + 1][gd->player_x] == '1')
+			return (0);
+	}
+	return (1);
+}
+
+void	update_player_position(int keycode, struct s_game_data *gd)
+{
+	if (keycode == gd->key_left)
+		gd->player_x--;
+	else if (keycode == gd->key_right)
+		gd->player_x++;
+	else if (keycode == gd->key_up)
+		gd->player_y--;
+	else if (keycode == gd->key_down)
+		gd->player_y++;
+}
+
 int	key_hook(int keycode, struct s_game_data *gd)
 {
-	gd->name = "HALLO";
-	printf("Hello from key_hook! %i\n", keycode);
+	if (keycode == gd->key_up || keycode == gd->key_down
+		|| keycode == gd->key_left || keycode == gd->key_right)
+	{
+		if (check_movement_valid(keycode, gd))
+		{
+			gd->player_total_moves += 1;
+			update_player_position(keycode, gd);
+			printf("Total player moves: %i\n", gd->player_total_moves);
+		}
+	}
 	return (0);
 }

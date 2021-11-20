@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/11 14:16:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/19 15:12:37 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/20 01:11:14 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ struct s_game_data
 {
 	void	*mlx;
 	void	*win;
+	unsigned long int		total_frames;
 
 	char	*name;
 	char	**map;
@@ -24,6 +25,16 @@ struct s_game_data
 	char	*map_values;
 	int		map_height;
 	int		map_width;
+
+	int		amount_collectibles;
+	int		player_direction;
+	int		player_total_moves;
+	int		player_x;
+	int		player_y;
+	int		key_up;
+	int		key_left;
+	int		key_right;
+	int		key_down;
 
 	void	*empty_space_img;
 	void	*wall_img;
@@ -38,11 +49,6 @@ struct s_game_data
 	char	*player_img_path;
 };
 
-struct s_game_state
-{
-	int	direction;
-};
-
 void	initialize_game_data(struct s_game_data *gd);
 
 void	exit_strategy(char *error, int err);
@@ -52,7 +58,9 @@ int		key_hook(int keycode, struct s_game_data *gd);
 void	render(struct s_game_data *gd);
 int		render_map(struct s_game_data *gd);
 void	render_image(char type, int row, int column, struct s_game_data *gd);
+void	render_player(struct s_game_data *gd);
 
+void	set_player_position(struct s_game_data *gd);
 void	set_map_size(struct s_game_data *gd);
 int		rect_check(struct s_game_data *gd);
 int		value_check(struct s_game_data *gd);

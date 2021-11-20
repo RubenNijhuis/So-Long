@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 13:24:12 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/19 16:28:30 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/20 01:12:42 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,16 @@ int	render_map(struct s_game_data *gd)
 		{
 			render_image('0', row, column, gd);
 			render_image(gd->map[row][column], row, column, gd);
+			render_player(gd);
 			column++;
 		}
 		column = 0;
 		row++;
 	}
-	render_player(gd, );
+	gd->total_frames++;
+	if (gd->total_frames % 90 == 0)
+		printf("%lu\n", gd->total_frames);
+	render_player(gd);
 	return (0);
 }
 
@@ -63,8 +67,14 @@ void	*create_window(struct s_game_data *gd)
 	return (window);
 }
 
-void	render(struct s_game_data *gd, struct s_game_state *gs)
+void	render(struct s_game_data *gd)
 {
+	gd->player_total_moves = 0;
+	gd->key_up = 13;
+	gd->key_down = 1;
+	gd->key_right = 2;
+	gd->key_left = 0;
+	gd->total_frames = 0;
 	gd->mlx = mlx_init();
 	initialize_game_data(gd);
 	gd->win = create_window(gd);

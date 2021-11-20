@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/16 11:08:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/19 12:38:28 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/20 00:56:49 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 #include <stdio.h>
 #include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 int	validate_map(char *path, struct s_game_data *gd)
 {
@@ -28,9 +30,13 @@ int	validate_map(char *path, struct s_game_data *gd)
 	gd->map_path = path;
 	fd = open(gd->map_path, O_RDONLY);
 	if (fd == -1)
-		exit_strategy("Error! Could not open file\n", -1);
+	{
+		printf("Error! Could not open file\n");
+		exit(-1);
+	}
 	gd->map = parse_map(fd, gd);
 	set_map_size(gd);
+	set_player_position(gd);
 	return_value += rect_check(gd);
 	return_value += border_check(gd);
 	return_value += value_check(gd);
