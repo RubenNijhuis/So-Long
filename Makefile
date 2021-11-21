@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/11 13:21:32 by rnijhuis      #+#    #+#                  #
-#    Updated: 2021/11/21 09:36:07 by rubennijhui   ########   odam.nl          #
+#    Updated: 2021/11/21 14:20:21 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,15 +15,16 @@ INCLUDE_DIR := include
 SRC_DIR := src
 BIN_DIR := ./bin/
 
-SRCS := src/main.c\
-		src/render.c\
+SRCS := src/render.c\
+		src/initialization/initialize_data.c\
+		src/initialization/initialize_images.c\
 		src/exit_strategy.c\
-		src/map/utils.c\
 		src/map/validation.c\
 		src/map/set_values.c\
-		src/player/movement.c\
+		src/map/utils.c\
+		src/main.c\
 		src/player/render.c\
-		src/initialize_data.c\
+		src/player/movement.c\
 
 INCLUDES := ./include/libft.a\
 			./include/get_next_line.a
@@ -53,7 +54,7 @@ mlx:
 	@echo "📦 Moving mlx to 'include'"
 
 run:
-	./bin/so_long assets/map1.ber
+	./bin/so_long assets/map3.ber
 
 all: libft get_next_line mlx
 
