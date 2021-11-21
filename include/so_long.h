@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/11 14:16:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 14:22:44 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 22:16:24 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 # define SO_LONG_H
 
 # include <libft.h>
+
 typedef struct s_enemy
 {
 	int	direction;
 	int	position_x;
 	int	position_y;
-} t_enemy;
+}t_enemy;
 
 typedef struct s_game_data
 {
@@ -27,7 +28,7 @@ typedef struct s_game_data
 	void	*win;
 	int		total_frames;
 	int		res;
-	t_list	enemies;
+
 
 	char	*name;
 	char	**map;
@@ -41,12 +42,14 @@ typedef struct s_game_data
 	int		minimum_exits;
 
 	int		amount_collectibles;
-	int		amount_enemies;
 	int		player_direction;
 	int		player_total_moves;
 	int		player_x;
 	int		player_y;
 	int		allowed_to_exit;
+
+	int		amount_enemies;
+	t_enemy	**enemies;
 
 	int		key_up;
 	int		key_left;
@@ -63,6 +66,11 @@ typedef struct s_game_data
 	void	*player_img_down;
 	void	*player_img_left;
 
+	void	*enemy_img_up;
+	void	*enemy_img_right;
+	void	*enemy_img_down;
+	void	*enemy_img_left;
+
 	char	*empty_space_img_path;
 	char	*wall_img_path;
 	char	*collectible_img_path;
@@ -72,13 +80,21 @@ typedef struct s_game_data
 	char	*player_img_right_path;
 	char	*player_img_down_path;
 	char	*player_img_left_path;
+
+	char	*enemy_img_up_path;
+	char	*enemy_img_right_path;
+	char	*enemy_img_down_path;
+	char	*enemy_img_left_path;
 }t_game_data;
 
 void	initialize_map(char *path, t_game_data *gd);
 void	initialize_enemy(t_game_data *gd);
 void	initialize_player(t_game_data *gd);
+void	initialize_enemies(t_game_data *gd);
 void	initialize_game(t_game_data *gd);
 void	initialize_all_images(t_game_data *gd);
+
+void	create_enemies(t_game_data *gd);
 
 void	exit_strategy(char *message, int status);
 
@@ -90,6 +106,7 @@ void	render(t_game_data *gd);
 int		render_map(t_game_data *gd, int row, int column);
 void	render_image(char type, int row, int column, t_game_data *gd);
 void	render_player(t_game_data *gd);
+void	render_enemies(t_game_data *gd);
 void	*create_window(t_game_data *gd);
 
 void	set_map_size(t_game_data *gd);

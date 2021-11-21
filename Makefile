@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/11 13:21:32 by rnijhuis      #+#    #+#                  #
-#    Updated: 2021/11/21 14:20:21 by rubennijhui   ########   odam.nl          #
+#    Updated: 2021/11/21 22:03:07 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ SRC_DIR := src
 BIN_DIR := ./bin/
 
 SRCS := src/render.c\
+		src/enemy/render.c\
+		src/enemy/movement.c\
+		src/enemy/utils.c\
 		src/initialization/initialize_data.c\
 		src/initialization/initialize_images.c\
 		src/exit_strategy.c\

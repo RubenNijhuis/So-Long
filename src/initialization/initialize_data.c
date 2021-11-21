@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/21 14:04:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2021/11/21 14:20:38 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 22:02:24 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ void	initialize_player(t_game_data *gd)
 	gd->key_right = 2;
 	gd->key_left = 0;
 	gd->total_frames = 0;
+}
+
+/*
+ * Initializes player data
+*/
+void	initialize_enemies(t_game_data *gd)
+{
+	create_enemies(gd);
 }
 
 /*

@@ -6,13 +6,13 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 13:24:12 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 14:24:18 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 22:15:46 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 #include <mlx.h>
-
+#include <stdio.h>
 /*
  * Renders appropriate image based on character
 */
@@ -52,7 +52,7 @@ int	render_game(t_game_data *gd)
 {
 	go_through_map(gd, render_map);
 	render_player(gd);
-	// render_enemies(gd);
+	render_enemies(gd);
 	gd->total_frames++;
 	return (0);
 }
@@ -77,6 +77,7 @@ void	render(t_game_data *gd)
 	initialize_game(gd);
 	initialize_player(gd);
 	initialize_all_images(gd);
+	initialize_enemies(gd);
 	mlx_key_hook(gd->win, key_hook, gd);
 	mlx_loop_hook(gd->mlx, render_game, gd);
 	mlx_loop(gd->mlx);

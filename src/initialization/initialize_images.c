@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 16:13:41 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 14:23:18 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 22:05:55 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ void	initialize_map_images(t_game_data *gd)
 
 void	initialize_enemy_images(t_game_data *gd)
 {
-	gd->player_img_up_path = "assets/imgs/small5.xpm";
-	gd->player_img_right_path = "assets/imgs/collectible.xpm";
-	gd->player_img_down_path = "assets/imgs/wall.xpm";
-	gd->player_img_left_path = "assets/imgs/small5.xpm";
-	gd->player_img_up = mlx_xpm_file_to_image(gd->mlx,
-			gd->player_img_up_path, &gd->res, &gd->res);
-	gd->player_img_right = mlx_xpm_file_to_image(gd->mlx,
-			gd->player_img_right_path, &gd->res, &gd->res);
-	gd->player_img_down = mlx_xpm_file_to_image(gd->mlx,
-			gd->player_img_down_path, &gd->res, &gd->res);
-	gd->player_img_left = mlx_xpm_file_to_image(gd->mlx,
-			gd->player_img_left_path, &gd->res, &gd->res);
+	gd->enemy_img_up_path = "assets/imgs/small5.xpm";
+	gd->enemy_img_right_path = "assets/imgs/small5.xpm";
+	gd->enemy_img_down_path = "assets/imgs/small5.xpm";
+	gd->enemy_img_left_path = "assets/imgs/small5.xpm";
+	gd->enemy_img_up = mlx_xpm_file_to_image(gd->mlx,
+			gd->enemy_img_up_path, &gd->res, &gd->res);
+	gd->enemy_img_right = mlx_xpm_file_to_image(gd->mlx,
+			gd->enemy_img_right_path, &gd->res, &gd->res);
+	gd->enemy_img_down = mlx_xpm_file_to_image(gd->mlx,
+			gd->enemy_img_down_path, &gd->res, &gd->res);
+	gd->enemy_img_left = mlx_xpm_file_to_image(gd->mlx,
+			gd->enemy_img_left_path, &gd->res, &gd->res);
 }
 
 void	initialize_player_images(t_game_data *gd)
