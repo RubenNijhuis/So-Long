@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/19 10:53:02 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/20 11:14:22 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 10:22:14 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,28 @@ int	check_movement_valid(int keycode, struct s_game_data *gd)
 	return (1);
 }
 
-void	update_player_position(int keycode, struct s_game_data *gd)
+void	update_player_position(int keycode, t_game_data *gd)
 {
 	if (keycode == gd->key_left)
+	{
+		gd->player_direction = 4;
 		gd->player_x--;
+	}
 	else if (keycode == gd->key_right)
+	{
+		gd->player_direction = 2;
 		gd->player_x++;
+	}
 	else if (keycode == gd->key_up)
+	{
+		gd->player_direction = 1;
 		gd->player_y--;
+	}
 	else if (keycode == gd->key_down)
+	{
+		gd->player_direction = 3;
 		gd->player_y++;
+	}
 	if (gd->map[gd->player_y][gd->player_x] == 'C')
 	{
 		gd->amount_collectibles--;
@@ -57,9 +69,7 @@ void	update_player_position(int keycode, struct s_game_data *gd)
 	}
 	if (gd->map[gd->player_y][gd->player_x] == 'E' &&
 		gd->amount_collectibles == 0)
-	{
 		exit_strategy("Game finished!\n", EXIT_SUCCESS);
-	}
 }
 
 int	key_hook(int keycode, struct s_game_data *gd)
