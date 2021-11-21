@@ -6,73 +6,31 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/16 11:08:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/20 11:07:40 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 10:19:47 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include <so_long.h>
 #include <libft.h>
 #include <get_next_line.h>
 
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-
-int	validate_map(char *path, struct s_game_data *gd)
+int	border_check(t_game_data *gd, int row, int column)
 {
-	int	fd;
-	int	return_value;
-
-	return_value = 0;
-	gd->map_values = "01CEP";
-	gd->map_path = path;
-	fd = open(gd->map_path, O_RDONLY);
-	if (fd == -1)
+	if (row == 0 || row == gd->map_height - 1)
 	{
-		printf("Error! Could not open file\n");
-		exit(-1);
+		if (gd->map[row][column] != '1')
+			return (1);
 	}
-	gd->map = parse_map(fd, gd);
-	set_map_size(gd);
-	set_player_position(gd);
-	set_amount_collectibles(gd);
-	return_value += rect_check(gd);
-	return_value += border_check(gd);
-	return_value += value_check(gd);
-	return (return_value);
-}
-
-int	border_check(struct s_game_data *gd)
-{
-	int	row;
-	int	column;
-
-	row = 0;
-	column = 0;
-	while (row < gd->map_height)
+	else if (column == 0 || column == gd->map_width - 1)
 	{
-		while (column < gd->map_width)
-		{
-			if (row == 0 || row == gd->map_height - 1)
-			{
-				if (gd->map[row][column] != '1')
-					return (1);
-			}
-			else
-				if (column == 0 || column == gd->map_width - 1)
-					if (gd->map[row][column] != '1')
-						return (1);
-			column++;
-		}
-		column = 0;
-		row++;
+		if (gd->map[row][column] != '1')
+			return (1);
 	}
 	return (0);
 }
 
-int	value_check(struct s_game_data *gd)
+int	go_through_map(t_game_data *gd, int (*f)(t_game_data *gd,
+		int row, int column))
 {
 	int	row;
 	int	column;
@@ -83,7 +41,7 @@ int	value_check(struct s_game_data *gd)
 	{
 		while (column < gd->map_width)
 		{
-			if (ft_strchr(gd->map_values, gd->map[row][column]) == 0)
+			if (f(gd, row, column) == 1)
 				return (1);
 			column++;
 		}
@@ -93,16 +51,33 @@ int	value_check(struct s_game_data *gd)
 	return (0);
 }
 
-int	rect_check(struct s_game_data *gd)
+int	value_check(t_game_data *gd, int row, int column)
 {
-	int	prev_len;
-	int	row_len;
-	int	row;
+	if (gd->map[row][column] == 'E')
+		gd->minimum_exits--;
+	if (gd->map[row][column] == 'C')
+		gd->minimum_collectibles--;
+	if (gd->map[row][column] == 'P')
+		gd->minimum_players--;
+	if (ft_strchr(gd->map_values, gd->map[row][column]) == 0)
+		return (1);
+	if (row == gd->map_height - 1 && column == gd->map_width - 1)
+	{
+		if (gd->minimum_exits > 0 || gd->minimum_players > 0
+			|| gd->minimum_collectibles > 0)
+		{
+			return (1);
+		}
+	}
+	return (0);
+}
 
-	prev_len = 0;
-	row_len = 0;
-	row = 0;
-	while (gd->map[row] != NULL)
+int	rect_check(t_game_data *gd, int row, int column)
+{
+	static int	prev_len;
+	static int	row_len;
+
+	if (column == 0)
 	{
 		if (row == 0)
 			prev_len = ft_strlen(gd->map[row]);
@@ -111,7 +86,16 @@ int	rect_check(struct s_game_data *gd)
 			return (1);
 		else
 			prev_len = row_len;
-		row++;
 	}
+	return (0);
+}
+
+int	file_name_check(t_game_data *gd)
+{
+	int	path_len;
+
+	path_len = ft_strlen(gd->map_path);
+	if (ft_strncmp(&gd->map_path[path_len - 3], "ber", 4) != 0)
+		return (1);
 	return (0);
 }

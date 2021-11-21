@@ -6,74 +6,93 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/11 14:16:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/20 11:13:03 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 10:35:28 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-struct s_game_data
+typedef struct s_game_data
 {
-	void				*mlx;
-	void				*win;
-	unsigned long int	total_frames;
-	int					res;
+	void	*mlx;
+	void	*win;
+	int		total_frames;
+	int		res;
 
-	char				*name;
-	char				**map;
-	char				*map_path;
-	char				*map_values;
-	int					map_height;
-	int					map_width;
+	char	*name;
+	char	**map;
+	char	*map_path;
+	char	*map_values;
+	int		map_height;
+	int		map_width;
 
-	int					amount_collectibles;
-	int					player_direction;
-	int					player_total_moves;
-	int					player_x;
-	int					player_y;
-	int					key_up;
-	int					key_left;
-	int					key_right;
-	int					key_down;
-	int					allowed_to_exit;
+	int		minimum_collectibles;
+	int		minimum_players;
+	int		minimum_exits;
 
-	void				*empty_space_img;
-	void				*wall_img;
-	void				*collectible_img;
-	void				*map_exit_img;
-	void				*player_img;
+	int		amount_collectibles;
+	int		player_direction;
+	int		player_total_moves;
+	int		player_x;
+	int		player_y;
+	int		allowed_to_exit;
 
-	char				*empty_space_img_path;
-	char				*wall_img_path;
-	char				*collectible_img_path;
-	char				*map_exit_img_path;
-	char				*player_img_path;
-};
+	int		key_up;
+	int		key_left;
+	int		key_right;
+	int		key_down;
 
-void	initialize_images_data(struct s_game_data *gd);
-void	initialize_player_data(struct s_game_data *gd);
-void	initialize_game(struct s_game_data *gd);
+	void	*empty_space_img;
+	void	*wall_img;
+	void	*collectible_img;
+	void	*map_exit_img;
+
+	void	*player_img_up;
+	void	*player_img_right;
+	void	*player_img_down;
+	void	*player_img_left;
+
+	char	*empty_space_img_path;
+	char	*wall_img_path;
+	char	*collectible_img_path;
+	char	*map_exit_img_path;
+
+	char	*player_img_up_path;
+	char	*player_img_right_path;
+	char	*player_img_down_path;
+	char	*player_img_left_path;
+}t_game_data;
+
+void	initialize_images_data(t_game_data *gd);
+void	initialize_player_data(t_game_data *gd);
+void	initialize_game(t_game_data *gd);
+void	initialize_map_data(char *path, t_game_data *gd);
 
 void	exit_strategy(char *message, int status);
 
-int		check_movement_valid(int keycode, struct s_game_data *gd);
-void	update_player_position(int keycode, struct s_game_data *gd);
-int		key_hook(int keycode, struct s_game_data *gd);
+int		check_movement_valid(int keycode, t_game_data *gd);
+void	update_player_position(int keycode, t_game_data *gd);
+int		key_hook(int keycode, t_game_data *gd);
 
-void	render(struct s_game_data *gd);
-int		render_map(struct s_game_data *gd);
-void	render_image(char type, int row, int column, struct s_game_data *gd);
-void	render_player(struct s_game_data *gd);
-void	*create_window(struct s_game_data *gd);
+void	render(t_game_data *gd);
+int		render_map(t_game_data *gd);
+void	render_image(char type, int row, int column, t_game_data *gd);
+void	render_player(t_game_data *gd);
+void	*create_window(t_game_data *gd);
 
-void	set_player_position(struct s_game_data *gd);
-void	set_map_size(struct s_game_data *gd);
-void	set_amount_collectibles(struct s_game_data *gd);
-int		rect_check(struct s_game_data *gd);
-int		value_check(struct s_game_data *gd);
-int		border_check(struct s_game_data *gd);
-int		validate_map(char *path, struct s_game_data *gd);
-char	**parse_map(int fd, struct s_game_data *gd);
+void	set_player_position(t_game_data *gd, int row, int column);
+void	set_map_size(t_game_data *gd);
+void	set_amount_collectibles(t_game_data *gd, int row, int column);
+
+int		rect_check(t_game_data *gd, int row, int column);
+int		border_check(t_game_data *gd, int row, int column);
+int		value_check(t_game_data *gd, int row, int column);
+int		file_name_check(t_game_data *gd);
+
+int		validate_map(char *path, t_game_data *gd);
+char	**parse_map(int fd, t_game_data *gd);
+int		go_through_map(t_game_data *gd,
+			int (*f)(t_game_data *gd, int row, int column));
 
 #endif

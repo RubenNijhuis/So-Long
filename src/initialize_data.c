@@ -6,14 +6,14 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 16:13:41 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 10:27:48 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 10:36:03 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 #include <mlx.h>
 
-void	initialize_images_data(struct s_game_data *gd)
+void	initialize_images_data(t_game_data *gd)
 {
 	gd->empty_space_img_path = "assets/imgs/ground.xpm";
 	gd->wall_img_path = "assets/imgs/wall.xpm";
@@ -41,7 +41,7 @@ void	initialize_images_data(struct s_game_data *gd)
 			gd->player_img_left_path, &gd->res, &gd->res);
 }
 
-void	initialize_player_data(struct s_game_data *gd)
+void	initialize_player_data(t_game_data *gd)
 {
 	gd->player_direction = 1;
 	gd->player_total_moves = 0;
@@ -52,7 +52,7 @@ void	initialize_player_data(struct s_game_data *gd)
 	gd->total_frames = 0;
 }
 
-void	initialize_game(struct s_game_data *gd)
+void	initialize_game(t_game_data *gd)
 {
 	gd->res = 32;
 	gd->name = "So Long";
@@ -60,8 +60,11 @@ void	initialize_game(struct s_game_data *gd)
 	gd->win = create_window(gd);
 }
 
-void	initialize_map_data(char *path, struct s_game_data *gd)
+void	initialize_map_data(char *path, t_game_data *gd)
 {
+	gd->map_height = 0;
+	gd->map_width = 0;
+	gd->amount_collectibles = 0;
 	gd->map_values = "01CEP";
 	gd->map_path = path;
 	gd->minimum_collectibles = 1;

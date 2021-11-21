@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/19 10:53:02 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 10:22:14 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 10:30:19 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	check_movement_valid(int keycode, struct s_game_data *gd)
+int	check_movement_valid(int keycode, t_game_data *gd)
 {
 	if (keycode == gd->key_left)
 	{
@@ -72,7 +72,7 @@ void	update_player_position(int keycode, t_game_data *gd)
 		exit_strategy("Game finished!\n", EXIT_SUCCESS);
 }
 
-int	key_hook(int keycode, struct s_game_data *gd)
+int	key_hook(int keycode, t_game_data *gd)
 {
 	if (keycode == gd->key_up || keycode == gd->key_down
 		|| keycode == gd->key_left || keycode == gd->key_right)

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 13:24:12 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/20 11:08:37 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 10:30:19 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <mlx.h>
 #include <stdio.h>
 
-void	render_image(char type, int row, int column, struct s_game_data *gd)
+void	render_image(char type, int row, int column, t_game_data *gd)
 {
 	void	*image;
 
@@ -31,7 +31,7 @@ void	render_image(char type, int row, int column, struct s_game_data *gd)
 		gd->res * column, gd->res * row);
 }
 
-int	render_map(struct s_game_data *gd)
+int	render_map(t_game_data *gd)
 {
 	int		row;
 	int		column;
@@ -57,7 +57,7 @@ int	render_map(struct s_game_data *gd)
 	return (0);
 }
 
-void	*create_window(struct s_game_data *gd)
+void	*create_window(t_game_data *gd)
 {
 	void	*window;
 
@@ -66,7 +66,7 @@ void	*create_window(struct s_game_data *gd)
 	return (window);
 }
 
-void	render(struct s_game_data *gd)
+void	render(t_game_data *gd)
 {
 	initialize_game(gd);
 	initialize_images_data(gd);
