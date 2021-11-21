@@ -6,12 +6,11 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/20 01:02:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2021/11/21 11:15:27 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 11:58:30 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
-#include <libft.h>
 
 /*
  * Sets map size

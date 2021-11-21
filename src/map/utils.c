@@ -6,12 +6,11 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/17 13:47:52 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 11:17:38 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 14:20:56 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
-#include <libft.h>
 #include <get_next_line.h>
 
 #include <fcntl.h>
@@ -76,7 +75,7 @@ int	validate_map(char *path, t_game_data *gd)
 	int	return_value;
 
 	return_value = 0;
-	initialize_map_data(path, gd);
+	initialize_map(path, gd);
 	fd = open(gd->map_path, O_RDONLY);
 	if (fd == -1)
 		exit_strategy("Error\n Could not open file\n", EXIT_SUCCESS);

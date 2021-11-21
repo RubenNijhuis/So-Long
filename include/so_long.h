@@ -6,12 +6,20 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/11 14:16:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 11:02:55 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 14:22:44 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
+# include <libft.h>
+typedef struct s_enemy
+{
+	int	direction;
+	int	position_x;
+	int	position_y;
+} t_enemy;
 
 typedef struct s_game_data
 {
@@ -19,6 +27,7 @@ typedef struct s_game_data
 	void	*win;
 	int		total_frames;
 	int		res;
+	t_list	enemies;
 
 	char	*name;
 	char	**map;
@@ -32,6 +41,7 @@ typedef struct s_game_data
 	int		minimum_exits;
 
 	int		amount_collectibles;
+	int		amount_enemies;
 	int		player_direction;
 	int		player_total_moves;
 	int		player_x;
@@ -64,10 +74,11 @@ typedef struct s_game_data
 	char	*player_img_left_path;
 }t_game_data;
 
-void	initialize_images_data(t_game_data *gd);
-void	initialize_player_data(t_game_data *gd);
+void	initialize_map(char *path, t_game_data *gd);
+void	initialize_enemy(t_game_data *gd);
+void	initialize_player(t_game_data *gd);
 void	initialize_game(t_game_data *gd);
-void	initialize_map_data(char *path, t_game_data *gd);
+void	initialize_all_images(t_game_data *gd);
 
 void	exit_strategy(char *message, int status);
 

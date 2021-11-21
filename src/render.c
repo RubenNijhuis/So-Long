@@ -6,14 +6,12 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 13:24:12 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 11:04:50 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 14:24:18 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
-#include <libft.h>
 #include <mlx.h>
-#include <stdio.h>
 
 /*
  * Renders appropriate image based on character
@@ -77,8 +75,8 @@ void	*create_window(t_game_data *gd)
 void	render(t_game_data *gd)
 {
 	initialize_game(gd);
-	initialize_images_data(gd);
-	initialize_player_data(gd);
+	initialize_player(gd);
+	initialize_all_images(gd);
 	mlx_key_hook(gd->win, key_hook, gd);
 	mlx_loop_hook(gd->mlx, render_game, gd);
 	mlx_loop(gd->mlx);
