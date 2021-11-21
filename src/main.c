@@ -6,13 +6,16 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/11 13:42:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 10:39:43 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 11:13:32 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 #include <stdlib.h>
 
+/*
+ * Main function
+*/
 int	main(int argc, char *argv[])
 {
 	t_game_data	game_data;

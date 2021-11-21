@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/11 14:16:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 10:35:28 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 11:02:55 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@ void	update_player_position(int keycode, t_game_data *gd);
 int		key_hook(int keycode, t_game_data *gd);
 
 void	render(t_game_data *gd);
-int		render_map(t_game_data *gd);
+int		render_map(t_game_data *gd, int row, int column);
 void	render_image(char type, int row, int column, t_game_data *gd);
 void	render_player(t_game_data *gd);
 void	*create_window(t_game_data *gd);
 
-void	set_player_position(t_game_data *gd, int row, int column);
 void	set_map_size(t_game_data *gd);
-void	set_amount_collectibles(t_game_data *gd, int row, int column);
+int		set_player_position(t_game_data *gd, int row, int column);
+int		set_amount_collectibles(t_game_data *gd, int row, int column);
 
 int		rect_check(t_game_data *gd, int row, int column);
 int		border_check(t_game_data *gd, int row, int column);
@@ -91,7 +91,7 @@ int		value_check(t_game_data *gd, int row, int column);
 int		file_name_check(t_game_data *gd);
 
 int		validate_map(char *path, t_game_data *gd);
-char	**parse_map(int fd, t_game_data *gd);
+char	**parse_map(int fd);
 int		go_through_map(t_game_data *gd,
 			int (*f)(t_game_data *gd, int row, int column));
 

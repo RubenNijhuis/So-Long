@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/17 13:47:52 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 10:38:39 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 11:17:38 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include <libft.h>
 #include <get_next_line.h>
 
-#include <stdio.h>
 #include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
 
-char	**parse_map(int fd, t_game_data *gd)
+/*
+ * Parses the map and puts it into a 2d array
+*/
+char	**parse_map(int fd)
 {
 	char	*string;
 	char	*tmp_string;
@@ -42,6 +42,34 @@ char	**parse_map(int fd, t_game_data *gd)
 	return (map);
 }
 
+/*
+ * High order function that runs a function based on each character in the map
+*/
+int	go_through_map(t_game_data *gd, int (*f)(t_game_data *gd,
+		int row, int column))
+{
+	int	row;
+	int	column;
+
+	row = 0;
+	column = 0;
+	while (row < gd->map_height)
+	{
+		while (column < gd->map_width)
+		{
+			if (f(gd, row, column) == 1)
+				return (1);
+			column++;
+		}
+		column = 0;
+		row++;
+	}
+	return (0);
+}
+
+/*
+ * General map validation
+*/
 int	validate_map(char *path, t_game_data *gd)
 {
 	int	fd;
@@ -52,7 +80,8 @@ int	validate_map(char *path, t_game_data *gd)
 	fd = open(gd->map_path, O_RDONLY);
 	if (fd == -1)
 		exit_strategy("Error\n Could not open file\n", EXIT_SUCCESS);
-	gd->map = parse_map(fd, gd);
+	gd->map = parse_map(fd);
+	close(fd);
 	set_map_size(gd);
 	go_through_map(gd, set_player_position);
 	go_through_map(gd, set_amount_collectibles);

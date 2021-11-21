@@ -6,13 +6,16 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/19 22:04:39 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2021/11/21 10:20:18 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 11:12:04 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 #include <mlx.h>
 
+/*
+ * Renders correct player sprite based on direction
+*/
 void	render_player(t_game_data *gd)
 {
 	void	*img;

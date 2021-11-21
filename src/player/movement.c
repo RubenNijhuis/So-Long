@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/19 10:53:02 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 10:30:19 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 11:11:31 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+ * Checks if desired position is a valid one
+*/
 int	check_movement_valid(int keycode, t_game_data *gd)
 {
 	if (keycode == gd->key_left)
@@ -40,6 +43,9 @@ int	check_movement_valid(int keycode, t_game_data *gd)
 	return (1);
 }
 
+/*
+ * Changes player position and direction
+*/
 void	update_player_position(int keycode, t_game_data *gd)
 {
 	if (keycode == gd->key_left)
@@ -72,14 +78,19 @@ void	update_player_position(int keycode, t_game_data *gd)
 		exit_strategy("Game finished!\n", EXIT_SUCCESS);
 }
 
+/*
+ * Runs on each button press
+*/
 int	key_hook(int keycode, t_game_data *gd)
 {
+	if (keycode == 53)
+		exit_strategy("Game closed\n", EXIT_SUCCESS);
 	if (keycode == gd->key_up || keycode == gd->key_down
 		|| keycode == gd->key_left || keycode == gd->key_right)
 	{
 		if (check_movement_valid(keycode, gd))
 		{
-			gd->player_total_moves += 1;
+			gd->player_total_moves++;
 			update_player_position(keycode, gd);
 			printf("Total player moves: %i\n", gd->player_total_moves);
 		}

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 13:24:12 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 10:30:19 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 11:04:50 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include <mlx.h>
 #include <stdio.h>
 
+/*
+ * Renders appropriate image based on character
+*/
 void	render_image(char type, int row, int column, t_game_data *gd)
 {
 	void	*image;
@@ -31,32 +34,34 @@ void	render_image(char type, int row, int column, t_game_data *gd)
 		gd->res * column, gd->res * row);
 }
 
-int	render_map(t_game_data *gd)
+/*
+ * Goes through each character and renders the image
+*/
+int	render_map(t_game_data *gd, int row, int column)
 {
-	int		row;
-	int		column;
-
-	row = 0;
-	column = 0;
-	while (row < gd->map_height)
-	{
-		while (column < gd->map_width)
-		{
-			render_image('0', row, column, gd);
-			render_image(gd->map[row][column], row, column, gd);
-			render_player(gd);
-			if (gd->amount_collectibles == 0)
-				gd->allowed_to_exit = 1;
-			column++;
-		}
-		column = 0;
-		row++;
-	}
-	gd->total_frames++;
+	render_image('0', row, column, gd);
+	render_image(gd->map[row][column], row, column, gd);
 	render_player(gd);
+	if (gd->amount_collectibles == 0)
+		gd->allowed_to_exit = 1;
 	return (0);
 }
 
+/*
+ * Starting point of the game rendering
+*/
+int	render_game(t_game_data *gd)
+{
+	go_through_map(gd, render_map);
+	render_player(gd);
+	// render_enemies(gd);
+	gd->total_frames++;
+	return (0);
+}
+
+/*
+ * General create window
+*/
 void	*create_window(t_game_data *gd)
 {
 	void	*window;
@@ -66,12 +71,15 @@ void	*create_window(t_game_data *gd)
 	return (window);
 }
 
+/*
+ * Initialize mlx and add the hooks for interactivity
+*/
 void	render(t_game_data *gd)
 {
 	initialize_game(gd);
 	initialize_images_data(gd);
 	initialize_player_data(gd);
 	mlx_key_hook(gd->win, key_hook, gd);
-	mlx_loop_hook(gd->mlx, render_map, gd);
+	mlx_loop_hook(gd->mlx, render_game, gd);
 	mlx_loop(gd->mlx);
 }

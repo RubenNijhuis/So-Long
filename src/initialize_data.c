@@ -6,13 +6,16 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 16:13:41 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 10:36:03 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 11:13:20 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 #include <mlx.h>
 
+/*
+ * Initializes all images
+*/
 void	initialize_images_data(t_game_data *gd)
 {
 	gd->empty_space_img_path = "assets/imgs/ground.xpm";
@@ -41,6 +44,9 @@ void	initialize_images_data(t_game_data *gd)
 			gd->player_img_left_path, &gd->res, &gd->res);
 }
 
+/*
+ * Initializes player data
+*/
 void	initialize_player_data(t_game_data *gd)
 {
 	gd->player_direction = 1;
@@ -52,6 +58,9 @@ void	initialize_player_data(t_game_data *gd)
 	gd->total_frames = 0;
 }
 
+/*
+ * Initializes general game data
+*/
 void	initialize_game(t_game_data *gd)
 {
 	gd->res = 32;
@@ -60,6 +69,9 @@ void	initialize_game(t_game_data *gd)
 	gd->win = create_window(gd);
 }
 
+/*
+ * Initializes general map data
+*/
 void	initialize_map_data(char *path, t_game_data *gd)
 {
 	gd->map_height = 0;

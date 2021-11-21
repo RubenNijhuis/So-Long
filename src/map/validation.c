@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/16 11:08:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 10:19:47 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 11:00:44 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include <libft.h>
 #include <get_next_line.h>
 
+/*
+ * Checks if border of the map is all walls
+*/
 int	border_check(t_game_data *gd, int row, int column)
 {
 	if (row == 0 || row == gd->map_height - 1)
@@ -29,28 +32,9 @@ int	border_check(t_game_data *gd, int row, int column)
 	return (0);
 }
 
-int	go_through_map(t_game_data *gd, int (*f)(t_game_data *gd,
-		int row, int column))
-{
-	int	row;
-	int	column;
-
-	row = 0;
-	column = 0;
-	while (row < gd->map_height)
-	{
-		while (column < gd->map_width)
-		{
-			if (f(gd, row, column) == 1)
-				return (1);
-			column++;
-		}
-		column = 0;
-		row++;
-	}
-	return (0);
-}
-
+/*
+ * Goes through each character to see if it is part of the set
+*/
 int	value_check(t_game_data *gd, int row, int column)
 {
 	if (gd->map[row][column] == 'E')
@@ -72,6 +56,9 @@ int	value_check(t_game_data *gd, int row, int column)
 	return (0);
 }
 
+/*
+ * Goes through each line to see if file is a rectanguler shape
+*/
 int	rect_check(t_game_data *gd, int row, int column)
 {
 	static int	prev_len;
@@ -90,6 +77,9 @@ int	rect_check(t_game_data *gd, int row, int column)
 	return (0);
 }
 
+/*
+ * Compares last three letters of path and valid file name
+*/
 int	file_name_check(t_game_data *gd)
 {
 	int	path_len;
