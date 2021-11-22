@@ -1,5 +1,5 @@
 # So-Long
-🎮 Small game for the exercise 'so_long' at Codam. 
+🎮  Small game for the exercise 'so_long' at Codam. 
 
 ### Installation
 This project assumes you have Make installed.
