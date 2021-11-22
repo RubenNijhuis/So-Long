@@ -6,18 +6,49 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/21 22:43:50 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2021/11/22 01:18:11 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/22 13:09:58 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 #include <stdio.h>
 
+int	check_player_position(t_game_data *gd, t_enemy *enemy, int keycode)
+{
+	if (keycode == gd->key_left)
+	{
+		if (enemy->position_y == gd->player_y
+			&& enemy->position_x - 1 == gd->player_x)
+			return (0);
+	}
+	else if (keycode == gd->key_right)
+	{
+		if (enemy->position_y == gd->player_y
+			&& enemy->position_x + 1 == gd->player_x)
+			return (0);
+	}
+	else if (keycode == gd->key_up)
+	{
+		if (enemy->position_y + 1 == gd->player_y
+			&& enemy->position_x == gd->player_x)
+			return (0);
+	}
+	else if (keycode == gd->key_down)
+	{
+		if (enemy->position_y - 1 == gd->player_y
+			&& enemy->position_x == gd->player_x)
+			return (0);
+	}
+	return (1);
+}
+
 int	check_all_enemy_positions(t_game_data *gd, t_enemy *enemy, int keycode)
 {
 	int	i;
 
 	i = 0;
+	if (check_player_position(gd, enemy, keycode) == 0)
+		return (0);
 	while (i < gd->amount_enemies)
 	{
 		if (keycode == gd->key_left)
@@ -42,10 +73,7 @@ int	check_all_enemy_positions(t_game_data *gd, t_enemy *enemy, int keycode)
 		{
 			if (enemy->position_y == gd->enemies[i]->position_y - 1
 				&& enemy->position_x == gd->enemies[i]->position_x)
-			{
-				printf(": %i %i, 2: %i %i \n", enemy->position_x, enemy->position_y, gd->enemies[i]->position_x, gd->enemies[i]->position_y);
 				return (0);
-			}
 		}
 		i++;
 	}

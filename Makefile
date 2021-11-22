@@ -6,7 +6,7 @@
 #    By: rnijhuis <rnijhuis@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/11 13:21:32 by rnijhuis      #+#    #+#                  #
-#    Updated: 2021/11/21 22:03:07 by rubennijhui   ########   odam.nl          #
+#    Updated: 2021/11/22 10:21:46 by rnijhuis      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC_DIR := src
 BIN_DIR := ./bin/
 
 SRCS := src/render.c\
+		src/display_score.c\
 		src/enemy/render.c\
 		src/enemy/movement.c\
 		src/enemy/utils.c\
@@ -57,7 +58,7 @@ mlx:
 	@echo "📦 Moving mlx to 'include'"
 
 run:
-	./bin/so_long assets/map3.ber
+	./bin/so_long assets/map2.ber
 
 all: libft get_next_line mlx
 

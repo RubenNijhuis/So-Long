@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/19 10:53:02 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/22 01:19:30 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/22 13:13:55 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// int check_hit_enemy();
+int	check_hit_enemy(int keycode, t_game_data *gd)
+{
+	int	i;
+
+	i = 0;
+	while (i < gd->amount_enemies)
+	{
+		if (keycode == gd->key_left
+			&& gd->enemies[i]->position_x == gd->player_x - 1
+			&& gd->enemies[i]->position_y == gd->player_y)
+			return (0);
+		else if (keycode == gd->key_right
+			&& gd->enemies[i]->position_x == gd->player_x + 1
+			&& gd->enemies[i]->position_y == gd->player_y)
+			return (0);
+		else if (keycode == gd->key_u
+			&& gd->enemies[i]->position_x == gd->player_x
+			&& gd->enemies[i]->position_y == gd->player_y + 1)
+			return (0);
+		else if (keycode == gd->key_down
+			&& gd->enemies[i]->position_x == gd->player_x
+			&& gd->enemies[i]->position_y == gd->player_y - 1)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 /*
  * Checks if desired position is a valid one
 */
 int	check_movement_valid(int keycode, t_game_data *gd)
 {
+	if (check_hit_enemy(keycode, gd) == 0)
+		exit_strategy("Enemy hit!", EXIT_SUCCESS);
 	if (keycode == gd->key_left)
 	{
 		if (gd->map[gd->player_y][gd->player_x - 1] == '1')
@@ -96,7 +124,6 @@ int	key_hook(int keycode, t_game_data *gd)
 			gd->player_total_moves++;
 			update_player_position(keycode, gd);
 			update_enemy_positions(gd);
-			printf("Total player moves: %i\n", gd->player_total_moves);
 		}
 	}
 	return (0);
