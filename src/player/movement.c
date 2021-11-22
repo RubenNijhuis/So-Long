@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/19 10:53:02 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 21:46:33 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/22 01:19:17 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <mlx.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+int	check_hit_enemy()
 
 /*
  * Checks if desired position is a valid one
@@ -93,6 +95,7 @@ int	key_hook(int keycode, t_game_data *gd)
 		{
 			gd->player_total_moves++;
 			update_player_position(keycode, gd);
+			update_enemy_positions(gd);
 			printf("Total player moves: %i\n", gd->player_total_moves);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/21 11:44:35 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2021/11/21 22:34:57 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/22 00:58:46 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	place_enemies(t_game_data *gd)
 	{
 		gd->enemies[i]->position_x = 20;
 		gd->enemies[i]->position_y = i + 1;
-		printf("WHAT");
 		i++;
 	}
 }
@@ -96,7 +95,4 @@ void	create_enemies(t_game_data *gd)
 	}
 	gd->enemies = enemies;
 	place_enemies(gd);
-	printf("%i ", gd->enemies[0]->position_y);
-	printf("%i ", gd->enemies[1]->position_y);
-	printf("%i ", gd->enemies[2]->position_y);
 }

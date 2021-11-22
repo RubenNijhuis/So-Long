@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/11 14:16:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 22:16:24 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/21 22:56:43 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	initialize_player(t_game_data *gd);
 void	initialize_enemies(t_game_data *gd);
 void	initialize_game(t_game_data *gd);
 void	initialize_all_images(t_game_data *gd);
+
+void	update_enemy_positions(t_game_data *gd);
 
 void	create_enemies(t_game_data *gd);
 
