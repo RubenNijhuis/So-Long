@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 13:24:12 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 22:46:55 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/22 01:54:41 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	render_game(t_game_data *gd)
 	go_through_map(gd, render_map);
 	render_player(gd);
 	render_enemies(gd);
+	display_score(gd);
 	gd->total_frames++;
 	return (0);
 }

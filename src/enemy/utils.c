@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/21 11:44:35 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2021/11/22 00:58:46 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/22 02:00:39 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	create_enemies(t_game_data *gd)
 
 	i = 0;
 	total_chars = gd->map_height * gd->map_width;
-	gd->amount_enemies = total_chars / 50;
+	gd->amount_enemies = total_chars / 100;
 	enemies = malloc(gd->amount_enemies * sizeof(t_enemy *));
 	if (enemies == NULL)
 		exit_strategy("Error\nMallocing of enemies array failed", EXIT_FAILURE);
