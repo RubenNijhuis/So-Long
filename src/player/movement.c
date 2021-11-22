@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/19 10:53:02 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/22 01:19:17 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/22 01:19:30 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	check_hit_enemy()
+// int check_hit_enemy();
 
 /*
  * Checks if desired position is a valid one
