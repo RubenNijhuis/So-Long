@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/11 14:16:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 22:56:43 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/23 16:22:37 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_game_data
 	void	*win;
 	int		total_frames;
 	int		res;
-
 
 	char	*name;
 	char	**map;
@@ -97,7 +96,7 @@ void	initialize_all_images(t_game_data *gd);
 void	update_enemy_positions(t_game_data *gd);
 
 void	create_enemies(t_game_data *gd);
-
+void	display_score(t_game_data *gd);
 void	exit_strategy(char *message, int status);
 
 int		check_movement_valid(int keycode, t_game_data *gd);

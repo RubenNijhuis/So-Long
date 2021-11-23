@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/19 10:53:02 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/22 13:13:55 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/23 16:22:47 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_hit_enemy(int keycode, t_game_data *gd)
 			&& gd->enemies[i]->position_x == gd->player_x + 1
 			&& gd->enemies[i]->position_y == gd->player_y)
 			return (0);
-		else if (keycode == gd->key_u
+		else if (keycode == gd->key_up
 			&& gd->enemies[i]->position_x == gd->player_x
 			&& gd->enemies[i]->position_y == gd->player_y + 1)
 			return (0);

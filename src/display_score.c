@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/22 01:54:10 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2021/11/22 13:11:06 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/23 17:01:35 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,13 @@ void	create_white_bg(t_game_data *gd)
 
 void	display_score(t_game_data *gd)
 {
+	char	*str;
+
+	str = ft_itoa(gd->player_total_moves);
 	create_white_bg(gd);
-	mlx_string_put(gd->mlx, gd->win, 2, 10, create_trgb(1, 0, 0, 0),
-		ft_strjoin("Total moves: ", ft_itoa(gd->player_total_moves)));
+	mlx_string_put(gd->mlx, gd->win, 2, 10,
+		create_trgb(1, 0, 0, 0), "Total moves: ");
+	mlx_string_put(gd->mlx, gd->win, 90, 10, create_trgb(1, 0, 0, 0),
+		str);
+	free(str);
 }

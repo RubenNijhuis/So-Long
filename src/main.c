@@ -6,12 +6,11 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/11 13:42:15 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 11:19:12 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/11/23 17:31:06 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
-#include <stdlib.h>
 
 /*
  * Main function
@@ -27,6 +26,7 @@ int	main(int argc, char *argv[])
 	}
 	else
 		exit_strategy("Error\n Too little or too many arguments\n", EXIT_SUCCESS);
-	render(&game_data);
+	// render(&game_data);
+	while(1);
 	return (0);
 }
