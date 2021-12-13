@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/16 11:08:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 11:58:36 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/12/07 13:36:48 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	file_name_check(t_game_data *gd)
 	int	path_len;
 
 	path_len = ft_strlen(gd->map_path);
-	if (ft_strncmp(&gd->map_path[path_len - 3], "ber", 4) != 0)
+	if (ft_strncmp(&gd->map_path[path_len - 4], ".ber", 4) != 0)
 		return (1);
 	return (0);
 }

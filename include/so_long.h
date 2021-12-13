@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/11 14:16:01 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/23 16:22:37 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/12/13 16:34:58 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,14 @@ void	initialize_game(t_game_data *gd);
 void	initialize_all_images(t_game_data *gd);
 
 void	update_enemy_positions(t_game_data *gd);
+int		check_all_enemy_positions(t_game_data *gd, t_enemy *enemy, int keycode);
+int		check_enemy_movement_valid(int keycode, t_game_data *gd, t_enemy *enemy);
 
 void	create_enemies(t_game_data *gd);
 void	display_score(t_game_data *gd);
 void	exit_strategy(char *message, int status);
 
+int		check_hit_enemy(int keycode, t_game_data *gd);
 int		check_movement_valid(int keycode, t_game_data *gd);
 void	update_player_position(int keycode, t_game_data *gd);
 int		key_hook(int keycode, t_game_data *gd);
@@ -113,6 +116,7 @@ void	*create_window(t_game_data *gd);
 void	set_map_size(t_game_data *gd);
 int		set_player_position(t_game_data *gd, int row, int column);
 int		set_amount_collectibles(t_game_data *gd, int row, int column);
+int		set_amount_enemies(t_game_data *gd, int row, int column);
 
 int		rect_check(t_game_data *gd, int row, int column);
 int		border_check(t_game_data *gd, int row, int column);

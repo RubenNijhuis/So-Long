@@ -6,13 +6,14 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/18 13:24:12 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/22 01:54:41 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/12/13 11:56:38 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 #include <mlx.h>
 #include <stdio.h>
+
 /*
  * Renders appropriate image based on character
 */
@@ -20,7 +21,7 @@ void	render_image(char type, int row, int column, t_game_data *gd)
 {
 	void	*image;
 
-	if (type == '0' || type == 'P')
+	if (type == '0')
 		image = gd->empty_space_img;
 	if (type == '1')
 		image = gd->wall_img;

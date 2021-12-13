@@ -6,13 +6,13 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/17 13:47:52 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/23 17:37:32 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/12/13 16:34:44 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 #include <get_next_line.h>
-
+#include <stdio.h>
 #include <fcntl.h>
 
 /*
@@ -30,26 +30,19 @@ char	**parse_map(int fd)
 	string = ft_calloc(1, sizeof(char));
 	while (first_time == 0)
 	{
-		first_time++;
 		tmp_string = get_next_line(fd);
 		if (tmp_string != NULL)
 		{
-			/*
-				if (strjoin fails)
-					:(
-			 */
 			string = ft_strjoin(string, tmp_string);
 			if (string == NULL)
 				return (NULL);
 			free(tmp_string);
-		} else
-		{
-			break;
 		}
+		else
+			break ;
 	}
 	map = ft_split(string, '\n');
 	free(string);
-	free(tmp_string);
 	return (map);
 }
 
@@ -63,16 +56,15 @@ int	go_through_map(t_game_data *gd, int (*f)(t_game_data *gd,
 	int	column;
 
 	row = 0;
-	column = 0;
 	while (row < gd->map_height)
 	{
+		column = 0;
 		while (column < gd->map_width)
 		{
 			if (f(gd, row, column) == 1)
 				return (1);
 			column++;
 		}
-		column = 0;
 		row++;
 	}
 	return (0);
@@ -87,18 +79,19 @@ int	validate_map(char *path, t_game_data *gd)
 	int	return_value;
 
 	return_value = 0;
-	// initialize_map(path, gd);
+	initialize_map(path, gd);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		exit_strategy("Error\n Could not open file\n", EXIT_SUCCESS);
+		exit_strategy("Error\nCould not open file\n", EXIT_SUCCESS);
 	gd->map = parse_map(fd);
 	close(fd);
-	// set_map_size(gd);
-	// go_through_map(gd, set_player_position);
-	// go_through_map(gd, set_amount_collectibles);
-	// return_value += file_name_check(gd);
-	// return_value += go_through_map(gd, rect_check);
-	// return_value += go_through_map(gd, border_check);
-	// return_value += go_through_map(gd, value_check);
+	set_map_size(gd);
+	go_through_map(gd, set_player_position);
+	go_through_map(gd, set_amount_collectibles);
+	go_through_map(gd, set_amount_enemies);
+	return_value += file_name_check(gd);
+	return_value += go_through_map(gd, rect_check);
+	return_value += go_through_map(gd, border_check);
+	return_value += go_through_map(gd, value_check);
 	return (return_value);
 }

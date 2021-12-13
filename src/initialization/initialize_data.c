@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/21 14:04:54 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2021/11/21 22:02:24 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/12/13 16:32:40 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	initialize_map(char *path, t_game_data *gd)
 	gd->map_height = 0;
 	gd->map_width = 0;
 	gd->amount_collectibles = 0;
-	gd->map_values = "01CEP";
+	gd->map_values = "01CEPB";
 	gd->map_path = path;
 	gd->minimum_collectibles = 1;
 	gd->minimum_exits = 1;

@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/09 09:45:31 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/23 17:08:01 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/11/24 11:27:56 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	ft_strlcpy(string, s1, strlen1 + 1);
 	ft_strlcpy(string + strlen1, s2, strlen2 + 1);
-	free((char *)s1);
+	// free((char *)s1);
 	return (string);
 }

@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/21 22:43:50 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2021/11/22 13:09:58 by rnijhuis      ########   odam.nl         */
+/*   Updated: 2021/12/13 15:45:10 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,38 +78,6 @@ int	check_all_enemy_positions(t_game_data *gd, t_enemy *enemy, int keycode)
 		i++;
 	}
 	return (1);
-}
-
-/*
- * Checks if desired position is a valid one
-*/
-int	check_enemy_movement_valid(int keycode, t_game_data *gd, t_enemy *enemy)
-{
-	if (keycode == gd->key_left)
-	{
-		if (gd->map[enemy->position_y][enemy->position_x - 1] != '1' &&
-			check_all_enemy_positions(gd, enemy, keycode))
-			return (1);
-	}
-	else if (keycode == gd->key_right)
-	{
-		if (gd->map[enemy->position_y][enemy->position_x + 1] != '1' &&
-			check_all_enemy_positions(gd, enemy, keycode))
-			return (1);
-	}
-	else if (keycode == gd->key_up)
-	{
-		if (gd->map[enemy->position_y - 1][enemy->position_x] != '1' &&
-			check_all_enemy_positions(gd, enemy, keycode))
-			return (1);
-	}
-	else if (keycode == gd->key_down)
-	{
-		if (gd->map[enemy->position_y + 1][enemy->position_x] != '1' &&
-			check_all_enemy_positions(gd, enemy, keycode))
-			return (1);
-	}
-	return (0);
 }
 
 void	update_enemy_direction(int keycode, t_enemy *enemy, t_game_data *gd)

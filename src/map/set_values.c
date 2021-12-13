@@ -6,7 +6,7 @@
 /*   By: rubennijhuis <rubennijhuis@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/20 01:02:07 by rubennijhui   #+#    #+#                 */
-/*   Updated: 2021/11/21 11:58:30 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2021/12/13 16:35:51 by rnijhuis      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,15 @@ int	set_amount_collectibles(t_game_data *gd, int row, int column)
 {
 	if (gd->map[row][column] == 'C')
 		gd->amount_collectibles++;
+	return (0);
+}
+
+/*
+ * Sets the amount of bad guys on the map
+*/
+int	set_amount_enemies(t_game_data *gd, int row, int column)
+{
+	if (gd->map[row][column] == 'B')
+		gd->amount_enemies++;
 	return (0);
 }
