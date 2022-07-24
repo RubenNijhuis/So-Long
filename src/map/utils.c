@@ -6,7 +6,7 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/17 13:47:52 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2022/07/24 14:22:42 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/24 14:30:17 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ char	**parse_map(int fd)
 	char	*string;
 	char	*tmp_string;
 	char	**map;
+	int		first_time;
 
-	tmp_string = ft_calloc(1, sizeof(char));
+	first_time = 0;
+	tmp_string = NULL;
 	string = ft_calloc(1, sizeof(char));
-	while (tmp_string != NULL)
+	while (first_time == 0)
 	{
 		tmp_string = get_next_line(fd);
 		if (tmp_string != NULL)
@@ -38,8 +40,11 @@ char	**parse_map(int fd)
 				return (NULL);
 			free(tmp_string);
 		}
+		else
+			break ;
 	}
 	map = ft_split(string, '\n');
+	free(string);
 	return (map);
 }
 
