@@ -6,13 +6,15 @@
 /*   By: rnijhuis <rnijhuis@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/17 13:47:52 by rnijhuis      #+#    #+#                 */
-/*   Updated: 2021/11/21 14:20:56 by rubennijhui   ########   odam.nl         */
+/*   Updated: 2022/07/24 14:22:42 by rubennijhui   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <so_long.h>
-#include <get_next_line.h>
+#include "so_long.h"
+#include "get_next_line.h"
+#include "libft.h"
 
+#include <stdlib.h>
 #include <fcntl.h>
 
 /*
@@ -45,22 +47,21 @@ char	**parse_map(int fd)
  * High order function that runs a function based on each character in the map
 */
 int	go_through_map(t_game_data *gd, int (*f)(t_game_data *gd,
-		int row, int column))
+		uint32_t row, uint32_t column))
 {
-	int	row;
-	int	column;
+	uint32_t	row;
+	uint32_t	column;
 
 	row = 0;
-	column = 0;
-	while (row < gd->map_height)
+	while (row < gd->map.map_height)
 	{
-		while (column < gd->map_width)
+		column = 0;
+		while (column < gd->map.map_width)
 		{
 			if (f(gd, row, column) == 1)
 				return (1);
 			column++;
 		}
-		column = 0;
 		row++;
 	}
 	return (0);
@@ -75,11 +76,11 @@ int	validate_map(char *path, t_game_data *gd)
 	int	return_value;
 
 	return_value = 0;
-	initialize_map(path, gd);
-	fd = open(gd->map_path, O_RDONLY);
+	initialize_map(path, &gd->map);
+	fd = open(gd->map.map_path, O_RDONLY);
 	if (fd == -1)
 		exit_strategy("Error\n Could not open file\n", EXIT_SUCCESS);
-	gd->map = parse_map(fd);
+	gd->map.map = parse_map(fd);
 	close(fd);
 	set_map_size(gd);
 	go_through_map(gd, set_player_position);

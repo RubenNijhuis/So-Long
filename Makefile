@@ -3,71 +3,112 @@
 #                                                         ::::::::             #
 #    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
-#    By: rnijhuis <rnijhuis@student.codam.nl>         +#+                      #
+#    By: mjoosten <mjoosten@student.42.fr>            +#+                      #
 #                                                    +#+                       #
-#    Created: 2021/11/11 13:21:32 by rnijhuis      #+#    #+#                  #
-#    Updated: 2021/11/22 10:21:46 by rnijhuis      ########   odam.nl          #
+#    Created: 2022/03/12 11:05:57 by rnijhuis      #+#    #+#                  #
+#    Updated: 2022/07/24 13:18:29 by rubennijhui   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := so_long
+#=====================================#
+#========= General variables =========#
+#=====================================#
+
+EXEC_NAME := so_long
+
 INCLUDE_DIR := include
 SRC_DIR := src
-BIN_DIR := ./bin/
+LIBS_DIR := libs
+OBJS_DIR := objs
+BIN_DIR := bin
 
-SRCS := src/render.c\
-		src/display_score.c\
-		src/enemy/render.c\
-		src/enemy/movement.c\
-		src/enemy/utils.c\
-		src/initialization/initialize_data.c\
-		src/initialization/initialize_images.c\
-		src/exit_strategy.c\
-		src/map/validation.c\
-		src/map/set_values.c\
-		src/map/utils.c\
-		src/main.c\
-		src/player/render.c\
-		src/player/movement.c\
+NAME			:=	$(BIN_DIR)/$(EXEC_NAME)
 
-INCLUDES := ./include/libft.a\
-			./include/get_next_line.a
+#=====================================#
+#============ Input files ============#
+#=====================================#
+
+HEADERS			:=	$(wildcard $(INCLUDE_DIR)/*.h)
+
+LIBS := $(LIBS_DIR)/LibFT/libft.a \
+		$(LIBS_DIR)/Get-Next-Line/get-next-line.a \
+		$(LIBS_DIR)/mlx/libmlx.a \
+
+LIBS_HEADERS :=	-I $(INCLUDE_DIR) \
+				-I $(LIBS_DIR)/LibFT/include/ \
+				-I $(LIBS_DIR)/Get-Next-Line/include/ \
+				-I $(LIBS_DIR)/mlx \
+
+SRCS := src/render.c \
+		src/initialization/initialize_data.c \
+		src/initialization/initialize_images.c \
+		src/exit_strategy.c \
+		src/map/validation.c \
+		src/map/set_values.c \
+		src/map/utils.c \
+		src/main.c \
+		src/player/render.c \
+		src/player/movement.c \
+
+OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+
+INC := $(LIBS_HEADERS)
+
+#=====================================#
+#========= Command arguments =========#
+#=====================================#
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-COMPILE = $(CC) $(CFLAGS)
+CFLAGS = -Wall -Werror -Wextra
+MLX = -framework OpenGL -framework AppKit
 
-$(NAME): $(OBJS) ./include/so_long.h
-	@$(COMPILE) $(SRCS) $(INCLUDES) -I $(INCLUDE_DIR) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(BIN_DIR)$(NAME)
+#=====================================#
+#=============== Rules ===============#
+#=====================================#
 
-libft:
-	@make -C ./libs/LibFT/src
-	@mv ./libs/LibFT/src/libft.a ./include
-	@cp ./libs/LibFT/src/libft.h ./include
-	@echo "📦 Moving libft to 'include'"
+$(OBJS_DIR)/%.o: %.c $(HEADERS)
+	@mkdir -p $(dir $@)
+	@$(CC) -c $(CFLAGS) $(INC) -o $@ $<
+	@echo "🔨 Compiling: $<"
+	
+all: $(NAME)
 
-get_next_line:
-	@make -C ./libs/Get-Next-Line/src
-	@mv ./libs/Get-Next-Line/src/get_next_line.a ./include
-	@cp ./libs/Get-Next-Line/src/get_next_line.h ./include
-	@echo "📦 Moving get-next-line to 'include'"
+$(NAME): $(OBJS) $(LIBS)
+	@$(CC) $(OBJS) $(LDFLAGS) $(LIBS) $(MLX) -g -fsanitize=address -o $(NAME)
+	@echo "✅ Built $(NAME)"
 
-mlx:
-	@make -C ./mlx
-	@cp ./mlx/mlx.h ./include
-	@echo "📦 Moving mlx to 'include'"
+submodules:
+	@git submodule update --init --recursive
 
-run:
-	./bin/so_long assets/map2.ber
-
-all: libft get_next_line mlx
+run: $(NAME)
+	@./$(NAME) $(INPUT_FILE)
 
 clean:
-	@rm -rf $(OBJS)
-	@echo "🧹 Removing object files"
+	@rm -rf $(OBJS_DIR)
 
 fclean: clean
-	@rm -rf ./bin/$(NAME)
-	@echo "🧹 Removing $(NAME) executable"
+	@make fclean -C $(LIBS_DIR)/LibFT
+	@make fclean -C $(LIBS_DIR)/Get-Next-Line
+	@make  clean -C $(LIBS_DIR)/mlx
+	@rm -f $(NAME)
 
 re: fclean all
+
+#=====================================#
+#=============== Libs ================#
+#=====================================#
+
+$(LIBS_DIR)/LibFT/libft.a:
+	@make -C $(LIBS_DIR)/libft
+
+$(LIBS_DIR)/Get-Next-Line/get-next-line.a:
+	@make -C $(LIBS_DIR)/Get-Next-Line
+
+$(LIBS_DIR)/mlx/libmlx.a:
+	@make -C $(LIBS_DIR)/mlx
+
+#=====================================#
+#=============== Misc ================#
+#=====================================#
+
+.PHONY: all re run clean fclean
